@@ -1,5 +1,8 @@
 name: Build n Release Synology Libre Speedtest Package
 
+permissions:
+  contents: write
+
 on:
   release:
     types: [published]
