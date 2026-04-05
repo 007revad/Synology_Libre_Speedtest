@@ -1,0 +1,63 @@
+#!/bin/bash
+
+PKG_NAME=$(basename "$SYNOPKG_PKGDEST")
+PKG_DEST="$SYNOPKG_PKGDEST"
+VAR_DIR="/var/packages/${PKG_NAME}/var"
+PIDFILE="${VAR_DIR}/httpd.pid"
+PORT=39878
+
+start() {
+    if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+        echo "${PKG_NAME} is already running"
+        exit 0
+    fi
+    if ! command -v python3 >/dev/null 2>&1; then
+        echo "Error: python3 not found. Please install Python3 from Package Center."
+        exit 1
+    fi
+    mkdir -p "$VAR_DIR"
+    python3 "${PKG_DEST}/bin/httpd.py" "$PORT" "${PKG_DEST}/ui" \
+        >> "${VAR_DIR}/httpd.log" 2>&1 &
+    echo $! > "$PIDFILE"
+    echo "${PKG_NAME} started (PID $(cat "$PIDFILE"), port $PORT)"
+}
+
+stop() {
+    if [ -f "$PIDFILE" ]; then
+        pid=$(cat "$PIDFILE")
+        if kill -0 "$pid" 2>/dev/null; then
+            kill "$pid"
+            sleep 1
+        fi
+        rm -f "$PIDFILE"
+        echo "${PKG_NAME} stopped"
+    else
+        # Fallback: kill by matching process
+        pkill -f "httpd.py ${PORT}" 2>/dev/null
+        echo "${PKG_NAME} stopped (no pidfile)"
+    fi
+}
+
+status() {
+    if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+        exit 0
+    else
+        exit 1
+    fi
+}
+
+case "$1" in
+    start)   start   ;;
+    stop)    stop    ;;
+    restart)
+        stop
+        sleep 1
+        start
+        ;;
+    status)  status  ;;
+    *)
+        echo "Usage: $0 {start|stop|restart|status}"
+        exit 2
+        ;;
+esac
+exit 0

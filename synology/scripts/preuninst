@@ -1,0 +1,15 @@
+#!/bin/bash
+
+PKG_NAME=$(basename "$SYNOPKG_PKGDEST")
+VAR_DIR="/var/packages/${PKG_NAME}/var"
+WEBMAN_LINK="/usr/syno/synoman/webman/3rdparty/${PKG_NAME}"
+
+log_message() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" >> "${VAR_DIR}/install.log" 2>/dev/null || echo "$1"
+}
+
+rm -f "${WEBMAN_LINK}" && \
+    log_message "Removed webman symlink" || \
+    log_message "Warning: Could not remove webman symlink"
+
+exit 0

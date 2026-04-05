@@ -1,0 +1,14 @@
+{
+  "web-config": {
+    "type"   : "dsm",
+    "title"  : "LibreSpeedtest",
+    "desc"   : "LibreSpeed Speedtest",
+    "icon"   : "images/icon_256.png",
+    "url"    : "/webman/3rdparty/LibreSpeedtest/index.html",
+    "allUsers": true
+  },
+  "port-config": {
+    "protocol": "http",
+    "port"    : 39878
+  }
+}

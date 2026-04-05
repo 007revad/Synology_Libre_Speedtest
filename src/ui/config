@@ -1,0 +1,14 @@
+{
+  ".url": {
+    "SYNO.SDS.LibreSpeedtest": {
+      "type"    : "url",
+      "icon"    : "images/icon_256.png",
+      "title"   : "LibreSpeedtest",
+      "desc"    : "Self-hosted LAN speed test",
+      "url"     : "webman/3rdparty/LibreSpeedtest/index.html",
+      "width"   : 1000,
+      "height"  : 700,
+      "allUsers": true
+    }
+  }
+}
