@@ -26,5 +26,15 @@ Synology package to install Libre Speedtest and run it in a GUI to test your Int
 
 <br>
 
-<!--- <p align="center">Description of image 2 goes here</p> --->
+<p align="center">Testing 1 GbE speed</p>
 <p align="center"><img src="/images/result.png"></p>
+
+<br>
+
+<p align="center">Testing 2.5 GbE speed</p>
+<p align="center"><img src="/images/result_2-5gbe.png"></p>
+
+<br>
+
+<p align="center">Testing 10 GbE speed</p>
+<p align="center"><img src="/images/result_10gbe.png"></p>
