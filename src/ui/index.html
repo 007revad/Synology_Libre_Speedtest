@@ -32,10 +32,12 @@ var SPEEDTEST_SERVERS=[
 //INITIALIZE SPEEDTEST
 var s=new Speedtest(); //create speed test object
 s.setParameter("telemetry_level","disabled"); //telemetry disabled - no PHP backend //enable basic telemetry (for results sharing)
-s.setParameter("url_dl","backend/garbage.cgi");
+s.setParameter("url_dl","backend/garbage.bin");
 s.setParameter("url_ul","backend/empty.cgi");
 s.setParameter("url_ping","backend/empty.cgi");
 s.setParameter("url_getIp","backend/getIP.cgi");
+s.setParameter("garbagePhp_chunkSize", 10);  // 10MB per stream instead of 100MB
+s.setParameter("xhr_dlMultistream", 3);      // 3 streams instead of 6
 
 //SERVER AUTO SELECTION
 function initServers(){

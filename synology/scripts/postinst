@@ -11,7 +11,7 @@ log_message() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" >> "$LOG_FILE" 2>/dev/null || echo "$1"
 }
 
-# Create var directory for logs and pidfile
+# Create var directory for logs
 mkdir -p "$VAR_DIR" || { echo "Error: Failed to create VAR_DIR"; exit 1; }
 log_message "Post-installation starting for package: ${PKG_NAME}"
 
@@ -23,29 +23,23 @@ else
     exit 1
 fi
 
-# Create cgi-bin directory with symlinks to backend CGI scripts
-# Python's CGIHTTPRequestHandler only executes scripts in cgi-bin/
-mkdir -p "${UI_DIR}/cgi-bin" || { log_message "Error: Failed to create cgi-bin dir"; exit 1; }
-
-for cgi in garbage.cgi empty.cgi getIP.cgi; do
-    ln -sf "../backend/${cgi}" "${UI_DIR}/cgi-bin/${cgi}" && \
-        log_message "Created cgi-bin symlink: ${cgi}" || \
-        log_message "Warning: Failed to create cgi-bin symlink for ${cgi}"
-done
-
 # Set execute permissions on CGI scripts
-for cgi in "${UI_DIR}/backend/garbage.cgi" \
-           "${UI_DIR}/backend/empty.cgi" \
+for cgi in "${UI_DIR}/backend/empty.cgi" \
            "${UI_DIR}/backend/getIP.cgi"; do
     chmod +x "$cgi" && \
         log_message "Set +x on $(basename $cgi)" || \
         log_message "Warning: Could not chmod $(basename $cgi)"
 done
 
-# Set execute permission on httpd.py
-chmod +x "${PKG_DEST}/bin/httpd.py" && \
-    log_message "Set +x on bin/httpd.py" || \
-    log_message "Warning: Could not chmod bin/httpd.py"
+# Create 100MB static file for download test
+# Served directly by nginx - much faster than CGI-generated data
+log_message "Creating 100MB download test file (this may take a moment)..."
+if dd if=/dev/urandom of="${UI_DIR}/backend/garbage.bin" bs=1M count=100 2>/dev/null; then
+    log_message "Created garbage.bin (100MB)"
+else
+    log_message "Error: Failed to create garbage.bin"
+    exit 1
+fi
 
 log_message "Post-installation completed successfully"
 echo >> "$LOG_FILE"
