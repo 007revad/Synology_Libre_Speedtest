@@ -35,7 +35,7 @@ done
 # Served directly by nginx - much faster than CGI-generated data
 log_message "Creating 100MB download test file (this may take a moment)..."
 #if dd if=/dev/urandom of="${UI_DIR}/backend/garbage.bin" bs=1M count=100 2>/dev/null; then  # takes 8 minutes!
-if openssl rand -out /tmp/test3.bin $((100*1024*1024)) 2>/dev/null; then
+if openssl rand -out ${UI_DIR}/backend/garbage.bin $((100*1024*1024)) 2>/dev/null; then
     log_message "Created garbage.bin (100MB)"
 else
     log_message "Error: Failed to create garbage.bin"
