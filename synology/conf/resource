@@ -1,14 +1,11 @@
 {
+  "systemd-unit": {},
   "web-config": {
-    "type"   : "dsm",
-    "title"  : "LibreSpeedTest",
-    "desc"   : "LibreSpeed SpeedTest",
-    "icon"   : "images/icon_256.png",
-    "url"    : "/webman/3rdparty/LibreSpeedTest/index.html",
-    "allUsers": true
-  },
-  "port-config": {
-    "protocol": "http",
-    "port"    : 39878
+    "nginx-static-config": {
+      "enable": [{
+        "type": "dsm",
+        "relpath": "conf/nginx-libre.conf"
+      }]
+    }
   }
 }
