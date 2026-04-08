@@ -9,7 +9,7 @@
 
 ### Description
 
-Synology package to install Libre Speedtest and run it in a GUI to test your Internet speed.
+Synology package to install Libre Speedtest and run it in a GUI to test your LAN speed.
 
 ### Download the package
 
