@@ -1,7 +1,7 @@
 {
   "package": "LibreSpeedTest",
   "name": "LibreSpeedTest",
-  "version": "5.5.0-1",
+  "version": "5.5.0-2",
   "description": "LibreSpeed Speedtest GUI to test LAN speed",
   "target": "./src",
   "install_type": "package",
