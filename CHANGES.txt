@@ -1,2 +1,5 @@
+v5.5.0-2
+- Minor changes for making the package available in Package Center from my spk repository.
+
 v5.5.0-1
 - First release.
