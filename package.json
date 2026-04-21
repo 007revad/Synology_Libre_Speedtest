@@ -1,7 +1,7 @@
 {
   "package": "LibreSpeedTest",
   "name": "LibreSpeedTest",
-  "version": "5.5.0-2",
+  "version": "5.5.0-3",
   "description": "LibreSpeed Speedtest GUI to test LAN speed",
   "target": "./src",
   "install_type": "package",
@@ -14,8 +14,8 @@
   "synology": {
     "maintainer": "007revad",
     "maintainer_url": "https://github.com/007revad",
-    "distributor": "https://github.com/007revad/Synology_Libre_Speedtest",
-    "distributor_url": "https://github.com/007revad/Synology_Libre_Speedtest/releases",
+    "distributor": "007revad",
+    "distributor_url": "https://github.com/007revad/Synology_Libre_Speedtest",
     "support_url": "https://github.com/007revad/Synology_Libre_Speedtest/issues",
     "help_url": "https://github.com/007revad/Synology_Libre_Speedtest#README.md",
     "os_min_ver": "7.0-40337",
