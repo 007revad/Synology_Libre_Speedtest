@@ -9,7 +9,9 @@
 
 ### Description
 
-Synology DSM 7 package to install Libre Speedtest and run it in a GUI to test your LAN speed.
+Synology DSM package to install Libre Speedtest and run it in a GUI to test your LAN speed.
+
+Available for DSM 6 and 7.
 
 ### How to install the package
 
