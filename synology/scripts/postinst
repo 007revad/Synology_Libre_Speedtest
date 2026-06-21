@@ -11,6 +11,14 @@ log_message() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" >> "$LOG_FILE" 2>/dev/null || echo "$1"
 }
 
+log_message "Post-installation starting for package: $PKG_NAME"
+
+# Remove spurious files injected by the package builder
+rm -f  "$UI_DIR/Makefile"
+rm -f  "$UI_DIR/ui"  # self-referencing symlink
+rm -f  "$UI_DIR/texts/strings"  # strings file template
+log_message "Removed spurious package builder files"
+
 # Create var directory for logs
 mkdir -p "$VAR_DIR" || { echo "Error: Failed to create VAR_DIR"; exit 1; }
 log_message "Post-installation starting for package: ${PKG_NAME}"

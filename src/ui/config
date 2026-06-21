@@ -4,7 +4,7 @@
       "type"     : "url",
       "icon"     : "images/icon_256.png",
       "title"    : "LibreSpeedTest",
-      "desc"     : "LibreSpeedTest for Synology NAS",
+      "desc"     : "LibreSpeedTest",
       "url"      : "webman/3rdparty/LibreSpeedTest/index.html",
       "width"    : 1000,
       "height"   : 700,
