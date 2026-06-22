@@ -1,3 +1,6 @@
+v5.5.0-7
+- Bug fix for v5.5.0-6 having v5.5.0-5 in it's INFO file.
+
 v5.5.0-6
 - Added package for DSM 6.
 - Bug fixes for DSM 7 installation failing.
