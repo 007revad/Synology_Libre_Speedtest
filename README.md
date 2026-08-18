@@ -33,19 +33,29 @@ There are 2 ways to install the package:
 ### Screenshots
 
 <!--- <p align="center">Description of image 1 goes here</p> --->
-<p align="center"><img src="/images/installed.png"></p>
+<p align="center"><kbd><img src="/images/installed.png"></kbd></p>
+
+<br>
+
+<p align="center">Now a DSM app</p>
+<p align="center"><kbd><img src="/images/window.png"></kbd></p>
 
 <br>
 
 <p align="center">Testing 1 GbE speed</p>
-<p align="center"><img src="/images/result.png"></p>
+<p align="center"><kbd><img src="/images/result.png"></kbd></p>
 
 <br>
 
 <p align="center">Testing 2.5 GbE speed</p>
-<p align="center"><img src="/images/result_2-5gbe.png"></p>
+<p align="center"><kbd><img src="/images/result_2-5gbe.png"></kbd></p>
 
 <br>
 
 <p align="center">Testing 10 GbE speed</p>
-<p align="center"><img src="/images/result_10gbe.png"></p>
+<p align="center"><kbd><img src="/images/result_10gbe.png"></kbd></p>
+
+<br>
+
+<p align="center">Updated Privacy Policy</p>
+<p align="center"><kbd><img src="/images/privacy_policy.png"></kbd></p>
