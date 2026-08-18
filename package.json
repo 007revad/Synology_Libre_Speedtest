@@ -1,7 +1,7 @@
 {
   "package": "LibreSpeedTest",
   "name": "LibreSpeedTest",
-  "version": "5.5.0-7",
+  "version": "5.5.0-8",
   "description": "LibreSpeed Speedtest GUI to test LAN speed",
   "target": "./src",
   "install_type": "package",
@@ -21,7 +21,7 @@
     "arch": "x86_64",
     "displayname": "LibreSpeed Speedtest",
     "dsmuidir": "ui",
-    "dsmappname": "SYNO.SDS.LibreSpeedTest",
+    "dsmappname": "SYNO.SDS._ThirdParty.App.LibreSpeedTest",
     "thirdparty": "yes",
     "beta": "no"
   }

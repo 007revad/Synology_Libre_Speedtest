@@ -1,3 +1,15 @@
+v5.5.0-8
+- Changed from a webpage to a DSM window.
+- Changed the default Privacy Policy popup window because the package doesn't collect any data.
+- Changed to show Synology hostname.
+- Updated to load ui faster.
+- Updated to support multi-threading to be more reliable.
+  - DSM 6 now requires python 3.8 or later.
+- Bug fix for DSM 7.0 and 7.1. Now creates a DSM 7.0-71 package (as well as DMS 6 and 7.2).
+  - DSM 7.2 package works for 7.2, 7.3 and 7.4.
+- Bug fix for returning "200 OK" if there was an error.
+- Bug fix for showing as beta in v5.5.0-7.
+
 v5.5.0-7
 - Bug fix for v5.5.0-6 having v5.5.0-5 in it's INFO file.
 

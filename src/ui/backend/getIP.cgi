@@ -15,4 +15,4 @@ esac
 printf 'Content-Type: application/json\r\n'
 printf 'Cache-Control: no-store, no-cache, must-revalidate, max-age=0\r\n'
 printf '\r\n'
-printf '{"processedString":"%s","rawIspInfo":{"ip":"%s"}}\n' "$ip" "$ip"
+printf '{"processedString":"%s","rawIspInfo":{"ip":"%s"},"hostname":"%s"}\n' "$ip" "$ip" "$(hostname)"

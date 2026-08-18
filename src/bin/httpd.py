@@ -6,8 +6,8 @@ executing CGI scripts (which need root to run on Synology).
 """
 import os
 import sys
-from http.server import HTTPServer, CGIHTTPRequestHandler
-
+#from http.server import HTTPServer, CGIHTTPRequestHandler
+from http.server import HTTPServer, ThreadingHTTPServer, CGIHTTPRequestHandler
 
 class NoDemoteCGIHandler(CGIHTTPRequestHandler):
     def run_cgi(self):
@@ -35,4 +35,6 @@ if __name__ == '__main__':
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 39878
     webroot = os.path.abspath(sys.argv[2] if len(sys.argv) > 2 else '.')
     os.chdir(webroot)
-    HTTPServer(('', port), NoDemoteCGIHandler).serve_forever()
+    #HTTPServer(('', port), NoDemoteCGIHandler).serve_forever()
+    ThreadingHTTPServer(('', port), NoDemoteCGIHandler).serve_forever()
+

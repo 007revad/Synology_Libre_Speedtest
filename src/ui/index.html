@@ -42,19 +42,30 @@ s.setParameter("xhr_dlMultistream", 3);      // 3 streams instead of 6
 //SERVER AUTO SELECTION
 function initServers(){
 	if(SPEEDTEST_SERVERS.length==0){ //standalone installation
-		//just make the UI visible
-		I("loading").className="hidden";
 		I("serverArea").style.display="none";
-		I("testWrapper").className="visible";
+		//show instantly - no delay, no fadeIn animation, since LAN mode
+		//has no "Selecting a server..." step to sequence after anymore
+		I("loading").style.display="none";
+		var tw=I("testWrapper");
+		tw.className="";
+		tw.style.display="block";
 		initUI();
+		loadHostInfo();
 	}else{ //multiple servers
 		var noServersAvailable=function(){
-			I("message").innerHTML="No servers available";
+			//none of the configured remote servers responded (or the
+			//server list itself failed to load) - rather than dead-ending
+			//on a static message with no Start button, fall back to
+			//testing against this NAS directly, same as standalone mode
+			I("loading").style.display="none";
+			I("serverArea").style.display="none";
+			I("testWrapper").className="visible";
+			initUI();
 		}
 		var runServerSelect=function(){
 			s.selectServer(function(server){
 				if(server!=null){ //at least 1 server is available
-					I("loading").className="hidden"; //hide loading message
+					I("loading").style.display="none"; //hide loading message instantly, avoiding overlap with testWrapper's fadeIn
 					//populate server list for manual selection
 					for(var i=0;i<SPEEDTEST_SERVERS.length;i++){
 						if(SPEEDTEST_SERVERS[i].pingT==-1) continue;
@@ -176,7 +187,6 @@ function updateUI(forced){
 	if(!forced&&s.getState()!=3) return;
 	if(uiData==null) return;
 	var status=uiData.testState;
-	I("ip").textContent=uiData.clientIp;
 	I("dlText").textContent=(status==1&&uiData.dlStatus==0)?"...":format(uiData.dlStatus);
 	drawMeter(I("dlMeter"),mbpsToAmount(Number(uiData.dlStatus*(status==1?oscillate():1))),meterBk,dlColor,Number(uiData.dlProgress),progColor);
 	I("ulText").textContent=(status==3&&uiData.ulStatus==0)?"...":format(uiData.ulStatus);
@@ -202,7 +212,24 @@ function initUI(){
 	I("ulText").textContent="";
 	I("pingText").textContent="";
 	I("jitText").textContent="";
-	I("ip").textContent="";
+}
+//fetches this NAS's hostname and the client's IP directly from getIP.cgi,
+//independent of the speedtest library's own internal IP fetch (which only
+//runs once Start is clicked, as part of the "I" step in test_order) - so
+//this shows immediately when the UI appears instead of waiting for that
+function loadHostInfo(){
+	var xhr=new XMLHttpRequest();
+	xhr.open("GET","backend/getIP.cgi?r="+Math.random(),true);
+	xhr.onload=function(){
+		if(xhr.status!==200) return;
+		try{
+			var data=JSON.parse(xhr.responseText);
+			var host=data.hostname||"";
+			var ip=data.processedString||"";
+			I("ip").textContent=host?(host+" \u27F7 "+ip):ip;
+		}catch(e){}
+	};
+	xhr.send();
 }
 </script>
 <style type="text/css">
@@ -274,7 +301,7 @@ function initUI(){
 	}
 	#test{
 		margin-top:2em;
-		margin-bottom:12em;
+		margin-bottom:2em;
 	}
 	div.testArea{
 		display:inline-block;
@@ -425,12 +452,12 @@ function initUI(){
 		}
 	}
 </style>
-<title>LibreSpeed</title>
+<title>LibreSpeed LAN Test</title>
 </head>
 <body onload="initServers()">
-<h1>LibreSpeed</h1>
+<h1>LibreSpeed LAN Test</h1>
 <div id="loading" class="visible">
-	<p id="message"><span class="loadCircle"></span>Selecting a server...</p>
+	<!--- <p id="message"><span class="loadCircle"></span>Selecting a server...</p> --->
 </div>
 <div id="testWrapper" class="hidden">
 	<div id="startStopBtn" onclick="startStop()"></div><br/>
@@ -479,38 +506,14 @@ function initUI(){
 </div>
 <div id="privacyPolicy" style="display:none">
     <h2>Privacy Policy</h2>
-    <p>This HTML5 speed test server is configured with telemetry enabled.</p>
-    <h4>What data we collect</h4>
+    <p>This is a self-hosted LibreSpeed instance running entirely on your own Synology NAS, with telemetry disabled.</p>
+    <h4>What data is collected</h4>
     <p>
-        At the end of the test, the following data is collected and stored:
-        <ul>
-            <li>Test ID</li>
-            <li>Time of testing</li>
-            <li>Test results (download and upload speed, ping and jitter)</li>
-            <li>IP address</li>
-            <li>ISP information</li>
-            <li>Approximate location (inferred from IP address, not GPS)</li>
-            <li>User agent and browser locale</li>
-            <li>Test log (contains no personal information)</li>
-        </ul>
-    </p>
-    <h4>How we use the data</h4>
-    <p>
-        Data collected through this service is used to:
-        <ul>
-            <li>Allow sharing of test results (sharable image for forums, etc.)</li>
-            <li>To improve the service offered to you (for instance, to detect problems on our side)</li>
-        </ul>
-        No personal information is disclosed to third parties.
+        None. There is no backend service collecting or storing test results, IP addresses, or any other data. Your test results are shown only in this window and are not saved anywhere or shared with anyone, including the package developer.
     </p>
     <h4>Your consent</h4>
     <p>
-        By starting the test, you consent to the terms of this privacy policy.
-    </p>
-    <h4>Data removal</h4>
-    <p>
-        If you want to have your information deleted, you need to provide either the ID of the test or your IP address. This is the only way to identify your data, without this information we won't be able to comply with your request.<br/><br/>
-        Contact this email address for all deletion requests: <a href="mailto:PUT@YOUR_EMAIL.HERE">TO BE FILLED BY DEVELOPER</a>.
+        Since no data is collected, there is nothing to consent to beyond running the test itself on your own network.
     </p>
     <br/><br/>
     <div class="closePrivacyPolicy">

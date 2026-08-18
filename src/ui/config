@@ -1,14 +1,24 @@
 {
-  ".url": {
-    "SYNO.SDS.LibreSpeedTest": {
-      "type"     : "url",
-      "icon"     : "images/icon_256.png",
-      "title"    : "LibreSpeedTest",
-      "desc"     : "LibreSpeedTest",
-      "url"      : "webman/3rdparty/LibreSpeedTest/index.html",
-      "width"    : 1000,
-      "height"   : 700,
-      "allUsers" : true
+  "main.js": {
+    "SYNO.SDS._ThirdParty.App.LibreSpeedTest": {
+      "type": "app",
+      "title": "LibreSpeedTest",
+      "desc": "LibreSpeed Speedtest GUI to test LAN speed",
+      "icon": "images/icon_{0}.png",
+      "appWindow": "SYNO.SDS.LibreSpeedTest.MainWindow",
+      "allowMultiInstance": false,
+      "allowStandalone": true,
+      "allUsers": true,
+      "texts": "texts",
+      "preloadTexts": [
+        "app:title_failed",
+        "app:load_failed"
+      ]
+    },
+    "SYNO.SDS.LibreSpeedTest.MainWindow": {
+      "type": "lib",
+      "title": "LibreSpeedTest",
+      "icon": "images/icon_{0}.png"
     }
   }
 }

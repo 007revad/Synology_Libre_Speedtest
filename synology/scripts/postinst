@@ -2,10 +2,15 @@
 
 PKG_NAME=$(basename "$SYNOPKG_PKGDEST")
 PKG_DEST="$SYNOPKG_PKGDEST"
-VAR_DIR="/var/packages/${PKG_NAME}/var"
 WEBMAN_LINK="/usr/syno/synoman/webman/3rdparty/${PKG_NAME}"
 UI_DIR="${PKG_DEST}/ui"
 LOG_FILE="${VAR_DIR}/install.log"
+DSM=$(get_key_value /etc.defaults/VERSION majorversion)
+if [[ "$DSM" -gt "6" ]]; then
+    VAR_DIR="/var/packages/$PKG_NAME/var"
+else
+    VAR_DIR="/var/packages/$PKG_NAME/etc"
+fi
 
 log_message() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" >> "$LOG_FILE" 2>/dev/null || echo "$1"
@@ -14,6 +19,7 @@ log_message() {
 # Create var directory for logs
 mkdir -p "$VAR_DIR" || { echo "Error: Failed to create VAR_DIR"; exit 1; }
 
+echo "" >> "$VAR_DIR/install.log"
 log_message "Post-installation starting for package: ${PKG_NAME}"
 
 # Remove spurious files injected by the package builder
