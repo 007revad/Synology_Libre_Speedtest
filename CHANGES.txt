@@ -1,3 +1,6 @@
+v5.5.0-9
+- Bug fix for package center downloading the DSM 7.2 package for DSM 7.0 and 7.1.
+
 v5.5.0-8
 - Changed from a webpage to a DSM app window.
 - Changed the default Privacy Policy popup window's text because the package doesn't collect any data.
