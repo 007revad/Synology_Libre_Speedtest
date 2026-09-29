@@ -1,3 +1,7 @@
+v5.5.0-10
+- Changed so if another window is on top clicking anywhere in the visible part of Libre Speedtest's window brings it to the front.
+  - Previously you had to click the Libre Speedtest window's title bar.
+
 v5.5.0-9
 - Bug fix for package center downloading the DSM 7.2 package for DSM 7.0 and 7.1.
 
