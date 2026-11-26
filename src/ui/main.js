@@ -33,6 +33,8 @@ Ext.define("SYNO.SDS.LibreSpeedTest.MainWindow", {
             showHelp: false,
             width: 720,
             height: 630,
+            minWidth: 720,
+            minHeight: 630,
             html: this.buildHtml(),
             listeners: {
                 afterrender: {
